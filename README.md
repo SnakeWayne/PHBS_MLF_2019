@@ -5,10 +5,10 @@ phbs 2020 spring module3 machine learning
 
 |Name|Student ID|
 |:---|:---|
-|Shen Tingwei|1901212631|
-|He Junxian|1901212583 |
-|Yu Xinlin|1901212664|
-|Wang Zixiong|1901212644|
+|[Shen Tingwei](https://github.com/SnakeWayne)|1901212631|
+|[He Junxian](https://github.com/hejunxian256)|1901212583 |
+|[Yu Xinlin](https://github.com/398563924)|1901212664|
+|[Wang Zixiong](https://github.com/WangZixiong)|1901212644|
 
 ### Introduction
 
