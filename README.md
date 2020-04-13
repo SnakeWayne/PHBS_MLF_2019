@@ -12,7 +12,7 @@ phbs 2020 spring module3 machine learning
 
 ## Introduction
 
-Our project is going to do stock selection implementing the machine learning methods. Considering using the pure trading information performance not that well, we introduce the sentiment data borrowed from [chinascope](http://finance.chinascope.com/www/) based on the news. We prepear to generate some relating features to boost the accuracy.
+Our project is going to do stock selection implementing the machine learning methods. Considering using the pure trading information performance not that well, we introduce the sentiment data borrowed from [ChinaScope] database(http://finance.chinascope.com/www/) based on the news. We prepare to generate some relating features to boost the accuracy.
 
 ## Data set 
 You can find the sample data in the **data** folder
