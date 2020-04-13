@@ -23,7 +23,7 @@ The sentiment data conclude from one article review the emotion torward a certai
 We use night features and one label for training and testing. The main feature we research is the sentiment factor.
 Here are the steps we get sentiment score. First is to extract sentiment data of A-share stocks from these files. After preprocessing the sentiment dataset, we find that each news can effect many stocks in different ways. We extract each article review information for one company in one day as a sample. each sample includes three elements: sentiment type, sentiment weight and relevance. the sentiment type refers to **emotionIndicator** , which is set to three raw values:*1 for positive, 0 for neutral, 2 for negative*. We change negative indicator to -1 for better understanding. Sentiment weight and relevance refers to **emotionIndicator** and **ItemRelevance**. 
 Second step is to process the data. First is to calculate senti_score:  
-<center>senti_score = senti_type * senti_weight * 100.</center>  
+<p align="center">senti_score = senti_type * senti_weight * 100. </p>  
 Then we map calendar date to trade date: cut at 15:00. It means that the sentimental data before cut_hour:cut_time(eg. 15:00) will be taken into current day's trading, the sentimental data after cut_hour:cut_time will be taken into next day's trading. 
 Third step is to integrate the samples. We divides the samples by news time and relevant companies, the dividing principle now is trading date and stock code. We get the relevant stock sentiment score for trading days between 2016.1.4 and 2016.4.1.
 
