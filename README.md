@@ -1,5 +1,5 @@
-# PHBS_MLF_2019  - Final Project
-phbs 2020 spring module3 machine learning
+# Stock selection with Chinascope sentiment data 
+phbs 2020 spring module3 machine learning Final Project 
 
 ## Group Information
 
@@ -20,14 +20,13 @@ You can find the sample data in the **data** folder
 ### Data Summary
 The sentiment data conclude from one article review the emotion torward a certain company or person, it choose the indicator with the highest weight to be its overall sentiment. ChinaScope has clame that this classifaction accuracy is above 80%.Other trading data is provided by the api from [joinquant](https://www.joinquant.com/), inclduing the basic ohlc data and others.
 
-We use night features and one label for training and testing. The main feature we research is the sentiment factor.
-Here are the steps we get sentiment score. First is to extract sentiment data of A-share stocks from these files. After preprocessing the sentiment dataset, we find that each news can effect many stocks in different ways. We extract each article review information for one company in one day as a sample. each sample includes three elements: sentiment type, sentiment weight and relevance. the sentiment type refers to **emotionIndicator** , which is set to three raw values:*1 for positive, 0 for neutral, 2 for negative*. We change negative indicator to -1 for better understanding. Sentiment weight and relevance refers to **emotionIndicator** and **ItemRelevance**. 
-Second step is to process the data. First is to calculate senti_score:  
-<p align="center">senti_score = senti_type * senti_weight * 100. </p>  
-Then we map calendar date to trade date: cut at 15:00. It means that the sentimental data before cut_hour:cut_time(eg. 15:00) will be taken into current day's trading, the sentimental data after cut_hour:cut_time will be taken into next day's trading. 
-Third step is to integrate the samples. We divides the samples by news time and relevant companies, the dividing principle now is trading date and stock code. We get the relevant stock sentiment score for trading days between 2016.1.4 and 2016.4.1.
+We use nine features and one label for training and testing. The main feature we research is the sentiment factor.Here are the steps we get sentiment feature. 
 
-Rest eight features are from TaLib package. They are technical indicators: MFI, SMA5, SMA10, MOM, ROC, ATR, BETA and CCI. Here are their meanings:
+1. First is to extract sentiment data of A-share stocks from these files. After preprocessing the sentiment dataset, we find that each news can effect many stocks in different ways. We extract each article review information for one company in one day as a sample. each sample includes three elements: sentiment type, sentiment weight and relevance. the sentiment type refers to **emotionIndicator** , which is set to three raw values:*1 for positive, 0 for neutral, 2 for negative*. We change negative indicator to -1 for better understanding. Sentiment weight and relevance refers to **emotionIndicator** and **ItemRelevance**. 
+2. Secondly we calculate senti_score for each stock per news:<center>**senti_score = senti_type * senti_weight * 100.**</center>Since there may be more than one news for a stock per day, we calculate the average senti_score to be the final sentiment feature. Then we map calendar date to trade date: cut at 15:00. It means that the sentimental data before cut_hour:cut_time(eg. 15:00) will be taken into current day's trading, the sentimental data after cut_hour:cut_time will be taken into next day's trading. 
+
+
+Rest eight features are calculated by TaLib package. They are technical indicators: MFI, SMA5, SMA10, MOM, ROC, ATR, BETA and CCI. Here are their meanings:
 * MFI: Money Flow Index and Ratio，it also calls Volume Relative Strength Index，VRSI. It use four elements: days of rise, days of fall, increase of trading volume, decrease of trading volume to decide the trend of volume and energy and predict supply and demand in the market.
 * SMA5: Simple moving average for 5 days, it indicates the average standard of price in 5 days.
 * SMA10: Simple moving average for 10 days.
@@ -37,11 +36,14 @@ Rest eight features are from TaLib package. They are technical indicators: MFI, 
 * BETA: The β coefficient in CAPM model.
 * CCI: Commodity Channel Index, an index created by American stock analyst Donald Lambert to judge the bias of stock price.
 
+These features are just selected randomly because the main idea is to test the effect of sentiment feature.
+
+As for **labeling the data**, if the news_time is different from the trade date, we measure the close price of the two days, label it 1 for raise and 0 for drop. Otherwise we compare the close price and open price within the same day, also 1 for raise and 0 for drop
 
 ## Training
-We built 9 features, including 8 other features and 1 sentiment feature.The response is 0 and 1, representing fall and rise of stock price. In order to find out the contribution of the sentiment feature, we built 3 kinds of traing set: 1) only contains 8 other features; 2) contains 8 other features and sentiment feature; 3) only contains sentiment feature.
+We built 9 features, including 8 other features and 1 sentiment feature.The response is 0 and 1, representing fall and rise of stock price. In order to find out the contribution of the sentiment feature, we built 3 kinds of data set: 1) only contains 8 other features; 2) contains 8 other features and sentiment feature; 3) only contains sentiment feature. 1) and 2) is to find out whether sentiment feature will boost the predicting performance. 2) and 3) is to judge whether the other features serves as noice to sentiment feature or not.
 
-We train on 70% of the sample and test on 30% of the sample. To increase training speed, the data are standardized. And we drop out 4 lines that contain NaN.
+We train on 70% of the sample and test on 30% of the sample. To increase training speed, the data are standardized. Afraid of dropping the sentiment feature, we didn't perform PCA.
 
 We applied LR, SVC, TREE methods to train. In each methods, we also applied grid search to find the best hyperparameters. We compared the results mainly through confusion matrics. 
 
@@ -110,3 +112,6 @@ Accuracy is 52.7%; PRE is 52.7%
 Considering that people's decision rely on the prediction result. People will buy if predict 1, people will not act if predict 0. If prediction is 1 but it's 0 in reality, people will suffer financial loss. Consequently, we want TP high and FP low. We need to measure the result based on Precision (PRE=TP/(TP+FP)). The higher PRE rate, the more profit people gain.
 
 From the result of PRE, we find that combining other features and sentiment feature using SVC method can get the best result. The best kernel is 'rbf', so it may not perform well in linear classification. 
+
+There are two other things we find surprising. One is that solely using the sentiment feature sometimes performs worse than our randomly picked feature.This may suggest that using multiple weak feature somtimes perform better than a few well designed feature. The other is that solely using seniment data will classify most of the result to drop. This kind of passive thinking suggest that even when a good news happend we can't have the confidence to bet that the stock price will raise, but we can pretty sure it will drop if bad news cames out.
+
