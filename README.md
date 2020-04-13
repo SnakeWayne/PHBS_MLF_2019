@@ -22,9 +22,22 @@ The sentiment data conclude from one article review the emotion torward a certai
 
 And other trading data is provided by the api from [joinquant](https://www.joinquant.com/), inclduing the basic ohlc data and others.
 
+We use night features and one label for training and testing. The main feature we research is the sentiment factor. We will explain how to get the sentiment score.
+First step is to extract sentiment data of A-share stocks from these files. After preprocessing the sentiment dataset, we find that each news can effect many stocks in different ways. We extract each article review information for one company in one day as a sample. each sample includes three elements: sentiment type, sentiment weight and relevance. the sentiment type refers to **emotionIndicator** , which is set to three raw values:*1 for positive, 0 for neutral, 2 for negative*. We change negative indicator to -1 for better understanding. Sentiment weight and relevance refers to **emotionIndicator** and **ItemRelevance**. 
+Second step is to process the data. First is to calculate senti_score: senti_score = senti_type*senti_weight*100. Then we map calendar date to trade date: cut at 15:00. It means that the sentimental data before cut_hour:cut_time(eg. 15:00) will be taken into current day's trading, the sentimental data after cut_hour:cut_time will be taken into next day's trading. 
+Third step is to integrate the samples. We divides the samples by news time and relevant companies, the dividing principle now is trading date and stock code. We get the relevant stock sentiment score for trading days between 2016.1.4 and 2016.4.1.
 
+Rest eight features are from TaLib package. They are technical indicators: MFI, SMA5, SMA10, MOM, ROC, ATR, BETA and CCI. Here are their meanings:
+* MFI: Money Flow Index and Ratio，it also calls Volume Relative Strength Index，VRSI. It use four elements: days of rise, days of fall, increase of trading volume, decrease of trading volume to decide the trend of volume and energy and predict supply and demand in the market.
+* SMA5: Simple moving average for 5 days, it indicates the average standard of price in 5 days.
+* SMA10: Simple moving average for 10 days.
+* MOM: Momentum. It is the volatility rate of one stock in one period.
+* ROC: Rate of change. It compares current price with several days before to get the difference. It reflect the change rate of market.
+* ATR: Average true range. It is the average of price fluctuation in a period. People can use it for timing trading.
+* BETA: The β coefficient in CAPM model.
+* CCI: Commodity Channel Index, an index created by American stock analyst Donald Lambert to judge the bias of stock price.
 
-
+Our project is classification problem. For label we use 0-1 classification. For each sample, we compare the price of current trading day and the former trading day. If today price is higher we label 1, if not we label 0.
 
 
 ## Training
