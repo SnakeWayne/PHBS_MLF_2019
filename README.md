@@ -31,7 +31,7 @@ Along with the sentiment data, we also use traditional trading data, which can b
 #### How can we extract a useable feature from the sentiment data?
 Below are the steps of extracting a sentiment feature:
 
-1. We extract sentiment data of A-share stocks from rawdata. After preprocessing the sentiment dataset, we find that each news can effect many stocks in different ways. We extract each article review information for one company in one day as a sample. 
+1. We extract sentiment data of A-share stocks from rawdata. After preprocessing the sentiment dataset, we find that each news can effect many stocks in different ways. We extract each news article information for one company in one day as a sample. 
 
 2. Each sample includes three elements: __sentiment type__, __sentiment weight__ and __relevance__.
 
