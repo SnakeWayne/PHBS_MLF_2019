@@ -40,7 +40,7 @@ Below are the steps of extracting a sentiment feature:
 * __relevance__ refers to  and **ItemRelevance**, which means the relevance between news and the stock.
 
 3. Now we calculate sentiment score for each stock per news: 
-$$ sentiment\\_score = sentiment\\_type \times sentiment\\_weight \times relevance \times 100 $$ Since there may be more than one news for a stock per day, we calculate the average senti_score to be the final sentiment feature. Then we map calendar date to trade date: cut at 15:00. It means that the sentimental data before __cut_hour: cut_time__(eg. 15:00) will be taken into current day's trading, the sentimental data after cut_hour:cut_time will be taken into next day's trading. 
+$$ sentiment\\_score = sentiment\\_type \times sentiment\\_weight \times relevance \times 100 $$ Since there may be more than one news for a stock per day, we calculate the average sentiment score to be the final sentiment feature. Then we map calendar date to trade date: cut at 15:00. It means that the sentiment data before __cut_hour: cut_time__(eg. 15:00) will be taken into current day's trading, the sentiment data after cut_hour:cut_time will be taken into next day's trading. 
 
 ### Traditional trading-related features
 Because our purpose is to test the effectiveness of our sentiment feature, we also need some traditional trading-related features for comparison. Using TaLib package, we calculate eight technical indicators: __MFI__, __SMA5__, __SMA10__, __MOM__, __ROC__, __ATR__, __BETA__ and __CCI__. Their meanings are as follows:
