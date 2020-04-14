@@ -43,7 +43,7 @@ Below are the steps of extracting a sentiment feature:
 $$ sentiment\\_score = sentiment\\_type \times sentiment\\_weight \times relevance \times 100 $$ Since there may be more than one news for a stock per day, we calculate the average senti_score to be the final sentiment feature. Then we map calendar date to trade date: cut at 15:00. It means that the sentimental data before __cut_hour: cut_time__(eg. 15:00) will be taken into current day's trading, the sentimental data after cut_hour:cut_time will be taken into next day's trading. 
 
 ### Traditional trading-related features
-Rest eight traditional features related to trading infirmation are calculated by TaLib package. They are technical indicators: __MFI__, __SMA5__, __SMA10__, __MOM__, __ROC__, __ATR__, __BETA__ and __CCI__. Their meanings are as follows:
+Because our purpose is to test the effectiveness of our sentiment feature, we also need some traditional trading-related features for comparison. Using TaLib package, we calculate eight technical indicators: __MFI__, __SMA5__, __SMA10__, __MOM__, __ROC__, __ATR__, __BETA__ and __CCI__. Their meanings are as follows:
 * __MFI__: Money Flow Index and Ratio，it also calls Volume Relative Strength Index，VRSI. It use four elements: days of rise, days of fall, increase of trading volume, decrease of trading volume to decide the trend of volume and energy and predict supply and demand in the market.
 * __SMA5__: Simple moving average for 5 days, it indicates the average standard of price in 5 days.
 * __SMA10__: Simple moving average for 10 days.
@@ -60,7 +60,7 @@ As for **labeling the data**, if the news_time is different from the trade date,
 ## Training
 After data preparation, we have built 9 features, including 8 traditional trading-related features and 1 sentiment feature.
 
-We have also built 1 label, which is 0 and 1, representing fall and rise of stock price. 
+We have also built one label for stock price change, with the value of 0 or 1, representing the fall or rise of stock price. 
 
 In order to find out how much contribution the sentiment feature can make to stock selection, we build 3 kinds of dataset: 
 * __Set 1__: only contains 8 trading-related features
