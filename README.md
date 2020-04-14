@@ -101,7 +101,7 @@ The confusion matric is:
 
 Accuracy is 52.2%; PRE is 51.7%
 
-### 2. Support Vector Machine
+### 2. Support Vector Classifier
 
 #### __Set 1__: only contains 8 trading-related features
 The best parameter is {'svc__C': 100.0, 'svc__gamma': 0.1, 'svc__kernel': 'rbf'}
