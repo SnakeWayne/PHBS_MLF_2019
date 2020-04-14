@@ -1,4 +1,4 @@
-# Stock selection with ChinaScope sentiment data 
+# Group 2: Stock selection with ChinaScope sentiment data 
 phbs 2020 spring module3 machine learning Final Project 
 
 ## Group Information
@@ -150,7 +150,7 @@ The confusion matric is:
 Accuracy is 52.7%; PRE is 52.7%
 
 ### Preliminary Findings:
-Considering that people's trading decisions rely on the prediction result. People will buy if the prediction is 1, and will not act if the prediction is 0. If prediction is 1 but it's 0 in reality, people will suffer financial loss. Consequently, we want high TP and low FP, so we need to measure the result based on Precision (PRE=TP/(TP+FP)). The higher PRE rate, the more possible our model can generate profit.
+Considering that people's trading decisions rely on the prediction result. People will buy if the prediction is 1, and will not act if the prediction is 0. If prediction is 1 but it's 0 in reality, people will suffer financial loss. Consequently, we want high TP and low FP, so we need to measure the result based on Precision __(PRE=TP/(TP+FP))__. The higher PRE rate, the more possible our model can generate profit.
 
 From previous testing results, we find that combining 8 trading-related features and the sentiment feature using SVC method can get the best outcome. The best kernel is 'rbf', so it may not perform well in linear classification. 
 
