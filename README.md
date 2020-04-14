@@ -21,7 +21,9 @@ The sentiment data we use in this project is from [ChinaScope](http://finance.ch
 Sample data can be found in the **data** folder of our project repository.
 
 ### Data Summary
-The sentiment dataset includes a number of news articles and every article is related to a certain listed company. Corresponding to each piece of news, the dataset includes the emotion regarding to that company. For a specific piece of news, the emotional indicator with the highest weight will be its overall sentiment. ChinaScope has claim that this classifaction accuracy is above 80%. Other trading data is provided by the Python api from [joinquant](https://www.joinquant.com/).
+The sentiment dataset includes a number of news articles and every article is related to a certain listed company. Corresponding to each piece of news, the dataset includes the emotion regarding to that company. For a specific piece of news, the emotional indicator with the highest weight will be its overall sentiment. 
+
+Along with the sentiment data, we also use traditional trading data, which can be obtained through Python api of [joinquant](https://www.joinquant.com/).
 
 
 ## Data Preparation
