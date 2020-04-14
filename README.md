@@ -21,7 +21,7 @@ The sentiment data we use in this project is from [ChinaScope](http://finance.ch
 Sample data can be found in the **data** folder of our project repository.
 
 ### Data Summary
-The sentiment data conclude from one article review the emotion torward a certain company or person, it choose the indicator with the highest weight to be its overall sentiment. ChinaScope has claim that this classifaction accuracy is above 80%. Other trading data is provided by the api from [joinquant](https://www.joinquant.com/).
+The sentiment dataset includes a number of news articles and every article is related to a certain listed company. Corresponding to each piece of news, the dataset includes the emotion regarding to that company. For a specific piece of news, the emotional indicator with the highest weight will be its overall sentiment. ChinaScope has claim that this classifaction accuracy is above 80%. Other trading data is provided by the Python api from [joinquant](https://www.joinquant.com/).
 
 
 ## Data Preparation
@@ -38,7 +38,7 @@ Below are the steps of extracting a sentiment feature:
 * __relevance__ refers to  and **ItemRelevance**, which means the relevance between news and the stock.
 
 3. Now we calculate sentiment score for each stock per news: 
-$$ sentiment\\_score = sentiment\\_type \times sentiment\\_weight \times relevance \times 100 $$ Since there may be more than one news for a stock per day, we calculate the average senti_score to be the final sentiment feature. Then we map calendar date to trade date: cut at 15:00. It means that the sentimental data before cut_hour:cut_time(eg. 15:00) will be taken into current day's trading, the sentimental data after cut_hour:cut_time will be taken into next day's trading. 
+$$ sentiment\\_score = sentiment\\_type \times sentiment\\_weight \times relevance \times 100 $$ Since there may be more than one news for a stock per day, we calculate the average senti_score to be the final sentiment feature. Then we map calendar date to trade date: cut at 15:00. It means that the sentimental data before __cut_hour: cut_time__(eg. 15:00) will be taken into current day's trading, the sentimental data after cut_hour:cut_time will be taken into next day's trading. 
 
 ### Traditional trading-related features
 Rest eight traditional features related to trading infirmation are calculated by TaLib package. They are technical indicators: __MFI__, __SMA5__, __SMA10__, __MOM__, __ROC__, __ATR__, __BETA__ and __CCI__. Their meanings are as follows:
