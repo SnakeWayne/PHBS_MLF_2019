@@ -65,15 +65,15 @@ We have also built one label for stock price change, with the value of 0 or 1, r
 In order to find out how much contribution the sentiment feature can make to stock selection, we build 3 kinds of dataset: 
 * __Set 1__: only contains 8 trading-related features
 * __Set 2__: contains 8 trading-related features and the sentiment feature
-* __Set 3__: only contains sentiment feature. 
+* __Set 3__: only contains the sentiment feature. 
 
 By comparing __Set 1__ and __Set 2__, we want to find out whether the sentiment feature will boost the predicting performance. 
 
-By comparing __Set 2__ and __Set 3__, we want to find out whether the 8 trading-related features serve as noise to sentiment feature or not.
+By comparing __Set 2__ and __Set 3__, we want to find out whether the 8 trading-related features serve as noise to the sentiment feature or not.
 
 We train on 70% of the sample and test on 30% of the sample. To increase training speed, we standardize the data in advance. 
 
-We apply LR, SVC, TREE methods to train. In each methods, we also use grid search to find the best hyperparameters. We test our model on test datasets and compare the results mainly through confusion matrics. 
+We apply LR, SVC, TREE methods to train out model. In each methods, we also use grid search to find the best hyperparameters. Then,we test our model on test datasets and compare the results mainly through confusion matrics. 
 
 ## Testing
 ### 1. Logistic Regression
