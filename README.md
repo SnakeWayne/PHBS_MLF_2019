@@ -55,7 +55,7 @@ Because our purpose is to test the effectiveness of our sentiment feature, we al
 
 These traditional features are selected randomly because the our main purpose is to test the effectiveness of sentiment feature.
 
-As for **labeling the data**, if the news_time is different from the trade date, we measure the close price of the two days, label it 1 for raise and 0 for drop. Otherwise we compare the close price and open price within the same day, also 1 for raise and 0 for drop
+As for **labeling the data**, if the time of the news is different from the trade date, we measure the close price of the two days, label it 1 for price rise and 0 for price drop. Otherwise we compare the close price and open price within the same day, also 1 for rise and 0 for drop
 
 ## Training
 After data preparation, we have built 9 features, including 8 traditional trading-related features and 1 sentiment feature.
