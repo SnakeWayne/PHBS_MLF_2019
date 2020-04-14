@@ -34,7 +34,8 @@ Below are the steps of extracting a sentiment feature:
 2. Each sample includes three elements: __sentiment type__, __sentiment weight__ and __relevance__.
 
 * __Sentiment type__ refers to **emotionIndicator** , which is set to three raw values:*1 for positive, 0 for neutral, -1 for negative*. 
-* __Sentiment weight__ and __relevance__ refers to **emotionIndicator** and **ItemRelevance**. 
+* __Sentiment weight__ refers to **emotionWeight**, which shows emotional intensity the company stakeholders react to the news.
+* __relevance__ refers to  and **ItemRelevance**, which means the relevance between news and the stock.
 
 3. Now we calculate sentiment score for each stock per news: 
 $$ sentiment score = sentiment type \times sentiment weight \times relevance \times 100 $$ Since there may be more than one news for a stock per day, we calculate the average senti_score to be the final sentiment feature. Then we map calendar date to trade date: cut at 15:00. It means that the sentimental data before cut_hour:cut_time(eg. 15:00) will be taken into current day's trading, the sentimental data after cut_hour:cut_time will be taken into next day's trading. 
