@@ -15,7 +15,7 @@ phbs 2020 spring module3 machine learning Final Project
 Machine learning methods are often applied in stock selection in quantitative finance, based on trading data. However, market dynamics are also greatly influenced by people's sentiment, which makes stock selection methods using pure trading information less accurate. 
 
 Therefore, the purpose of our project is to introduce market sentiment data to stock selection with machine learning algorithms.
-The sentiment data we use in this project is from [ChinaScope](http://finance.chinascope.com/www/), a financial database. We try to generate some sentiment-related features to boost the accuracy in stock selection.
+The sentiment data we use in this project is from [ChinaScope](http://finance.chinascope.com/www/), a financial database. We try to generate an effective feature that can reflect the dynamics of market sentiment in order to boost the accuracy in stock selection.
 
 ## Data set 
 Sample data can be found in the **data** folder of our project repository.
@@ -24,7 +24,8 @@ Sample data can be found in the **data** folder of our project repository.
 The sentiment data conclude from one article review the emotion torward a certain company or person, it choose the indicator with the highest weight to be its overall sentiment. ChinaScope has claim that this classifaction accuracy is above 80%. Other trading data is provided by the api from [joinquant](https://www.joinquant.com/).
 
 
-### Data Preparation
+## Data Preparation
+### Sentiment feature
 #### How can we extract a useable feature from the sentiment data?
 Below are the steps of extracting a sentiment feature:
 
@@ -35,10 +36,11 @@ Below are the steps of extracting a sentiment feature:
 * __Sentiment type__ refers to **emotionIndicator** , which is set to three raw values:*1 for positive, 0 for neutral, -1 for negative*. 
 * __Sentiment weight__ and __relevance__ refers to **emotionIndicator** and **ItemRelevance**. 
 
-3. Now we calculate senti_score for each stock per news:<center>**senti_score = senti_type * senti_weight * 100.**</center>Since there may be more than one news for a stock per day, we calculate the average senti_score to be the final sentiment feature. Then we map calendar date to trade date: cut at 15:00. It means that the sentimental data before cut_hour:cut_time(eg. 15:00) will be taken into current day's trading, the sentimental data after cut_hour:cut_time will be taken into next day's trading. 
+3. Now we calculate senti_score for each stock per news:<center>**senti_score = senti_type * senti_weight * 100.**</center>
+Since there may be more than one news for a stock per day, we calculate the average senti_score to be the final sentiment feature. Then we map calendar date to trade date: cut at 15:00. It means that the sentimental data before cut_hour:cut_time(eg. 15:00) will be taken into current day's trading, the sentimental data after cut_hour:cut_time will be taken into next day's trading. 
 
-
-Rest eight traditional features related to trading infirmation are calculated by TaLib package. They are technical indicators: MFI, SMA5, SMA10, MOM, ROC, ATR, BETA and CCI. Their meanings are as follows:
+### Traditional trading-related features
+Rest eight traditional features related to trading infirmation are calculated by TaLib package. They are technical indicators: __MFI__, __SMA5__, __SMA10__, __MOM__, __ROC__, __ATR__, __BETA__ and __CCI__. Their meanings are as follows:
 * __MFI__: Money Flow Index and Ratio，it also calls Volume Relative Strength Index，VRSI. It use four elements: days of rise, days of fall, increase of trading volume, decrease of trading volume to decide the trend of volume and energy and predict supply and demand in the market.
 * __SMA5__: Simple moving average for 5 days, it indicates the average standard of price in 5 days.
 * __SMA10__: Simple moving average for 10 days.
@@ -152,7 +154,7 @@ Considering that people's trading decisions rely on the prediction result. Peopl
 
 From previous testing results, we find that combining 8 trading-related features and the sentiment feature using SVC method can get the best outcome. The best kernel is 'rbf', so it may not perform well in linear classification. 
 
-There are two other things we find surprising:
+There are two other surprising findings:
 * Solely using the sentiment feature (__Set 3__)sometimes performs worse than our randomly picked trading-related features, which may suggest that using multiple weak features somtimes perform better than just one well designed feature. 
 * Solely using the seniment feature (__Set 3__), most of the predictions are 0, which suggests future price drop. This kind of passive thinking suggest that even when a good news happen we can't have the confidence to bet the stock price will raise, but we can pretty sure the price will drop if come bad news comes out.
 
