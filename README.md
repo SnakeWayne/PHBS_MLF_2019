@@ -34,7 +34,8 @@ Below are the steps of extracting a sentiment feature:
 2. Each sample includes three elements: __sentiment type__, __sentiment weight__ and __relevance__.
 
 * __Sentiment type__ refers to **emotionIndicator** , which is set to three raw values:*1 for positive, 0 for neutral, -1 for negative*. 
-* __Sentiment weight__ and __relevance__ refers to **emotionIndicator** and **ItemRelevance**. 
+* __Sentiment weight__ refers to **emotionWeight**, which shows emotional intensity the company stakeholders react to the news.
+* __relevance__ refers to  and **ItemRelevance**, which means the relevance between news and the stock.
 
 3. Now we calculate senti_score for each stock per news:<center>**senti_score = senti_type * senti_weight * relevance * 100.**</center>
 
