@@ -184,6 +184,6 @@ Considering that people's trading decisions rely on the prediction result, peopl
 From previous testing results, though the overall classification result is not that promising, we find that combining 8 trading-related features and the sentiment feature using SVC method can get the best outcome. The best kernel is 'rbf', so it may not perform well in linear classification. 
 
 There are two other surprising findings:
-* Solely using the sentiment feature (__Set 3__)sometimes performs worse than our randomly picked trading-related features, which may suggest that using multiple weak features somtimes perform better than just one well designed feature. 
+* Solely using the sentiment feature (__Set 3__) sometimes performs worse than our randomly picked trading-related features, which may suggest that using multiple weak features somtimes perform better than just one well designed feature. 
 * Solely using the seniment feature (__Set 3__), most of the predictions are 0, which suggests future price drop. This kind of passive thinking suggests that even when a good news happen we can't have the confidence to bet the stock price will raise, but we can pretty sure the price will drop if some bad news comes out.
 
