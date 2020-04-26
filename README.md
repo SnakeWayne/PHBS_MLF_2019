@@ -71,9 +71,10 @@ In order to find out how much contribution the sentiment feature can make to sto
 * __Set 2__: contains 8 trading-related features and the sentiment feature
 * __Set 3__: only contains the sentiment feature. 
 
-By comparing __Set 1__ and __Set 2__, we want to find out whether the sentiment feature will boost the predicting performance. 
+Here we use an idea similar to variable controlling.  
+The difference between __Set 1__ and __Set 2__ is whether the sentiment feature is included or not. By comparing __Set 1__ and __Set 2__, we want to find out whether the sentiment feature will boost the predicting performance. 
 
-By comparing __Set 2__ and __Set 3__, we want to find out whether the 8 trading-related features serve as noise to the sentiment feature or not.
+The difference between __Set 2__ and __Set 3__ is whether the 8 trading-related features are included or not. By comparing __Set 2__ and __Set 3__, we want to find out whether the 8 trading-related features serve as noise to the sentiment feature or not, i.e. which way is better, use the sentiment feature solely or combine it with traditional trading-related features? 
 
 We train on 70% of the sample and test on 30% of the sample. To increase training speed, we standardize the data in advance. 
 
