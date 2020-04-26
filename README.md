@@ -42,6 +42,8 @@ Below are the steps of extracting a sentiment feature:
 3. Now we calculate sentiment score for each stock per news: 
 $$ sentiment\\_score = sentiment\\_type \times sentiment\\_weight \times relevance \times 100 $$ Since there may be more than one news for a stock per day, we calculate the average sentiment score to be the final sentiment feature. Then we map calendar date to trade date: cut at 15:00. It means that the sentiment data before __cut_hour: cut_time__(eg. 15:00) will be taken into current day's trading, the sentiment data after cut_hour:cut_time will be taken into next day's trading. 
 
+We did these steps in [our code](https://github.com/SnakeWayne/PHBS_MLF_2019/blob/master/FinalProjectCode/Sentimental_Factor_and_Dataset_Construction.ipynb), but you may not run this since we didn't upload the raw dataset for signing the NDA, but it is a lot like the sample data for reference and we do kept the [intermediate result](https://github.com/SnakeWayne/PHBS_MLF_2019/blob/master/FinalProjectCode/Sentimental_Factor_and_Dataset_Construction.ipynb)
+
 ### Traditional trading-related features
 Because our purpose is to test the effectiveness of our sentiment feature, we also need some traditional trading-related features for comparison. Using TaLib package, we calculate eight technical indicators: __MFI__, __SMA5__, __SMA10__, __MOM__, __ROC__, __ATR__, __BETA__ and __CCI__. Their meanings are as follows:
 * __MFI__: Money Flow Index and Ratio，it also calls Volume Relative Strength Index，VRSI. It use four elements: days of rise, days of fall, increase of trading volume, decrease of trading volume to decide the trend of volume and energy and predict supply and demand in the market.
@@ -58,7 +60,7 @@ These traditional features are selected randomly because the our main purpose is
 As for **labeling the data**, if the time of the news is different from the trade date, we measure the close price of the two days, label it 1 for price rise and 0 for price drop. Otherwise we compare the close price and open price within the same day, also 1 for rise and 0 for drop
 
 ## Training
-After data preparation, we have built 9 features, including 8 traditional trading-related features and 1 sentiment feature.
+After data preparation, we have built [9 features, including 8 traditional trading-related features and 1 sentiment feature](https://github.com/SnakeWayne/PHBS_MLF_2019/blob/master/FinalProjectCode/feature_new.xlsx).
 
 We have also built one label for stock price change, with the value of 0 or 1, representing the fall or rise of stock price. 
 
@@ -73,7 +75,7 @@ By comparing __Set 2__ and __Set 3__, we want to find out whether the 8 trading-
 
 We train on 70% of the sample and test on 30% of the sample. To increase training speed, we standardize the data in advance. 
 
-We apply LR, SVC, TREE methods to train out model. In each methods, we also use grid search to find the best hyperparameters. Then,we test our model on test datasets and compare the results mainly through confusion matrics. 
+We apply [LR](https://github.com/SnakeWayne/PHBS_MLF_2019/blob/master/FinalProjectCode/MLF%20project-LR.ipynb), [SVC](https://github.com/SnakeWayne/PHBS_MLF_2019/blob/master/FinalProjectCode/MLF%20project-SVC.ipynb), [TREE](https://github.com/SnakeWayne/PHBS_MLF_2019/blob/master/FinalProjectCode/MLF%20project-TREE.ipynb) methods to train out model. In each methods, we also use grid search to find the best hyperparameters. Then,we test our model on test datasets and compare the results mainly through confusion matrics. 
 
 ## Testing
 ### 1. Logistic Regression
@@ -152,10 +154,32 @@ The confusion matric is:
 
 Accuracy is 52.7%; PRE is 52.7%
 
+## Result table
+
+### Accuracy
+
+| |LR|SVM|Tree|
+|---|------|------- | ------|
+|  1.only contains 8 trading-related features|52.8% | 59.9% |  56.7% |
+| 2.contains 8 trading-related features and the sentiment feature|54.7%|  59.2%| 57.0% |
+|3.only contains sentiment feature |52.2%| 52.2% | 52.7% | 
+
+### PRE
+
+| |LR|SVM|Tree|
+|---|------|------- | ------|
+|  1.only contains 8 trading-related features|51.0% | 57.3% | 53.9% | 
+| 2.contains 8 trading-related features and the sentiment feature|53.8%| 57.6% |  54.4%|
+|3.only contains sentiment feature |51.7%| 50.6% | 52.7%|
+
+In short we can conclude that:
+1. By comparing __Set 1__ and __Set 2__ we can say that sentiment data do boost the overall accuracy but not as effective as we expected. The best case is about 2% benefit.
+2. By comparing __Set 2__ and __Set 3__ we find that even the radomly selected features is actually helping the prediction than just solely using sentiment feature. The chance of all the random features to act as noise is pretty low which shows the robustness of the ML algorithm.
+
 ## Preliminary Findings:
 Considering that people's trading decisions rely on the prediction result. People will buy if the prediction is 1, and will not act if the prediction is 0. If prediction is 1 but it's 0 in reality, people will suffer financial loss. Consequently, we want high TP and low FP, so we need to measure the result based on Precision __(PRE=TP/(TP+FP))__. The higher PRE rate, the more possible our model can generate profit.
 
-From previous testing results, we find that combining 8 trading-related features and the sentiment feature using SVC method can get the best outcome. The best kernel is 'rbf', so it may not perform well in linear classification. 
+From previous testing results, though the overall classification result is not that promising, we find that combining 8 trading-related features and the sentiment feature using SVC method can get the best outcome. The best kernel is 'rbf', so it may not perform well in linear classification. 
 
 There are two other surprising findings:
 * Solely using the sentiment feature (__Set 3__)sometimes performs worse than our randomly picked trading-related features, which may suggest that using multiple weak features somtimes perform better than just one well designed feature. 
