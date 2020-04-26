@@ -162,17 +162,17 @@ Accuracy is 52.7%; PRE is 52.7%
 
 | |LR|SVM|Tree|
 |---|------|------- | ------|
-|  1.__Set 1__ :only contains 8 trading-related features|52.8% | 59.9% |  56.7% |
-| 2.__Set 2__ :contains 8 trading-related features and the sentiment feature|54.7%|  59.2%| 57.0% |
-|3.__Set 3__ only contains sentiment feature |52.2%| 52.2% | 52.7% | 
+|  1.__Set 1__:only contains 8 trading-related features|52.8% | 59.9% |  56.7% |
+| 2.__Set 2__:contains 8 trading-related features and the sentiment feature|54.7%|  59.2%| 57.0% |
+|3.__Set 3__:only contains sentiment feature |52.2%| 52.2% | 52.7% | 
 
 ### PRE
 
 | |LR|SVM|Tree|
 |---|------|------- | ------|
-|  1.__Set 1__ :only contains 8 trading-related features|51.0% | 57.3% | 53.9% | 
-| 2.__Set 2__ :contains 8 trading-related features and the sentiment feature|53.8%| 57.6% |  54.4%|
-|3.__Set 3__ :only contains sentiment feature |51.7%| 50.6% | 52.7%|
+|  1.__Set 1__:only contains 8 trading-related features|51.0% | 57.3% | 53.9% | 
+| 2.__Set 2__:contains 8 trading-related features and the sentiment feature|53.8%| 57.6% |  54.4%|
+|3.__Set 3__:only contains sentiment feature |51.7%| 50.6% | 52.7%|
 
 In short we can conclude that:
 1. By comparing __Set 1__ and __Set 2__ we can find out that sentiment data do boost the overall accuracy but not as effective as we expected. The best case is about 2% benefit.
