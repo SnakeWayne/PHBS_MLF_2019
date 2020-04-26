@@ -18,7 +18,7 @@ Therefore, the purpose of our project is to introduce market sentiment data to s
 The sentiment data we use in this project is from [ChinaScope](http://finance.chinascope.com/www/), a financial database. We try to generate an effective feature that can reflect the dynamics of market sentiment in order to boost the accuracy in stock selection.
 
 ## Data set 
-Sample data can be found in the **data** folder of our project repository.
+Sample data can be found in the [data](https://github.com/SnakeWayne/PHBS_MLF_2019/tree/master/data) folder of our project repository.
 
 ### Data Summary
 The sentiment dataset we use includes a number of news articles and every article is related to a certain listed company. Corresponding to each piece of news, the dataset includes the emotion regarding to that company. For a specific piece of news, the emotional indicator with the highest weight will be its overall sentiment. 
