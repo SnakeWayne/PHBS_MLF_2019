@@ -31,18 +31,20 @@ Along with the sentiment data, we also use traditional trading data, which can b
 #### How can we extract a useable feature from the sentiment data?
 Below are the steps of extracting a sentiment feature:
 
-1. We extract sentiment data of A-share stocks from rawdata. After preprocessing the sentiment dataset, we find that each news can affect many stocks in different ways. We extract each news article information for one company in one day as a sample. 
+1. We extract sentiment data of A-share stocks from rawdata. After preprocessing the sentiment dataset, we find that each news can affect many stocks in different ways, so we extract each news article information for one company in one day as a sample. 
 
 2. Each sample includes three elements: __sentiment type__, __sentiment weight__ and __relevance__.
 
 * __sentiment type__ refers to **emotionIndicator** , which is set to three raw values:*1 for positive, 0 for neutral, -1 for negative*. 
 * __sentiment weight__ refers to **emotionWeight**, which shows emotional intensity the company stakeholders react to the news.
-* __relevance__ refers to  and **ItemRelevance**, which means the relevance between news and the stock.
+* __relevance__ refers to  **ItemRelevance**, which is literally the relevance between news and the stock.
 
 3. Now we calculate sentiment score for each stock per news: 
-$$ sentiment\\_score = sentiment\\_type \times sentiment\\_weight \times relevance \times 100 $$ Since there may be more than one news for a stock per day, we calculate the average sentiment score to be the final sentiment feature. Then we map calendar date to trade date: cut at 15:00. It means that the sentiment data before __cut_hour: cut_time__(eg. 15:00) will be taken into current day's trading, the sentiment data after cut_hour:cut_time will be taken into next day's trading. 
+$$ sentiment\\_score = sentiment\\_type \times sentiment\\_weight \times relevance \times 100 $$ Since there may be more than one news for a stock per day, we calculate the average sentiment score to be the final sentiment feature. 
 
-We did these steps in [our code](https://github.com/SnakeWayne/PHBS_MLF_2019/blob/master/FinalProjectCode/Sentimental_Factor_and_Dataset_Construction.ipynb), but you may not run this since we didn't upload the raw dataset for signing the NDA, but it is a lot like the sample data for reference and we do kept the [intermediate result](https://github.com/SnakeWayne/PHBS_MLF_2019/blob/master/FinalProjectCode/Sentimental_Factor_and_Dataset_Construction.ipynb)
+Then we map calendar date to trade date: cut at 15:00. It means that the sentiment data before __cut_hour: cut_time__(eg. 15:00) will be taken into current day's trading, and the sentiment data after cut_hour:cut_time will be taken into next day's trading. 
+
+We did the data prepration steps in [our code](https://github.com/SnakeWayne/PHBS_MLF_2019/blob/master/FinalProjectCode/Sentimental_Factor_and_Dataset_Construction.ipynb), but you may not run this since we didn't upload the raw dataset due to the NDA we previously signed with the provider, but the raw dataset is in the shape of the [sample data](https://github.com/SnakeWayne/PHBS_MLF_2019/tree/master/data) for reference and we have kept the [intermediate result](https://github.com/SnakeWayne/PHBS_MLF_2019/blob/master/FinalProjectCode/Sentimental_Factor_and_Dataset_Construction.ipynb)
 
 ### Traditional trading-related features
 Because our purpose is to test the effectiveness of our sentiment feature, we also need some traditional trading-related features for comparison. Using TaLib package, we calculate eight technical indicators: __MFI__, __SMA5__, __SMA10__, __MOM__, __ROC__, __ATR__, __BETA__ and __CCI__. Their meanings are as follows:
