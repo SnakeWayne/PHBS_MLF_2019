@@ -176,7 +176,7 @@ In short we can conclude that:
 1. By comparing __Set 1__ and __Set 2__ we can say that sentiment data do boost the overall accuracy but not as effective as we expected. The best case is about 2% benefit.
 2. By comparing __Set 2__ and __Set 3__ we find that even the radomly selected features is actually helping the prediction than just solely using sentiment feature. The chance of all the random features to act as noise is pretty low which shows the robustness of the ML algorithm.
 
-## Preliminary Findings:
+## Conclusion:
 Considering that people's trading decisions rely on the prediction result. People will buy if the prediction is 1, and will not act if the prediction is 0. If prediction is 1 but it's 0 in reality, people will suffer financial loss. Consequently, we want high TP and low FP, so we need to measure the result based on Precision __(PRE=TP/(TP+FP))__. The higher PRE rate, the more possible our model can generate profit.
 
 From previous testing results, though the overall classification result is not that promising, we find that combining 8 trading-related features and the sentiment feature using SVC method can get the best outcome. The best kernel is 'rbf', so it may not perform well in linear classification. 
